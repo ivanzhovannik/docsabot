@@ -16,22 +16,20 @@ run-prod:
 .PHONY: remote-build
 remote-build:
 	@echo "Creating git tag..."
-	@if [ -z "$${VERSION}" ]; then \
+	@if [ -z "${VERSION}" ]; then \
 		echo "VERSION variable is not set. Use 'make remote-build VERSION=x.y.z' to set the version."; \
 		exit 1; \
 	fi
-	@git tag v$${VERSION}
-	@git push origin v$${VERSION}
-	@echo "Git tag v$${VERSION} pushed. Remote build should be triggered by GitHub Actions."
+	@git tag v${VERSION}
+	@git push origin v${VERSION}
+	@echo "Git tag v${VERSION} pushed. Remote build should be triggered by GitHub Actions."
 
 .PHONY: remote-pull
 remote-pull:
 	@echo "Pulling Docker image..."
-	@if [ -z "$${VERSION}" ]; then \
+	@if [ -z "${VERSION}" ]; then \
 		echo "VERSION variable is not set. Use 'make remote-pull VERSION=x.y.z' to set the version."; \
 		exit 1; \
 	fi
-	@docker pull ghcr.io/ivanzhovannik/docsabot:v$${VERSION}
-	docker pull ghcr.io/ivanzhovannik/docsabot:v$${VERSION}
-	@echo "Docker image ghcr.io/ivanzhovannik/docsabot:v$${VERSION} pulled successfully."
-
+	@docker pull ghcr.io/ivanzhovannik/docsabot:v${VERSION}
+	@echo "Docker image ghcr.io/ivanzhovannik/docsabot:v${VERSION} pulled successfully."
