@@ -32,5 +32,6 @@ remote-pull:
 		exit 1; \
 	fi
 	@docker pull ghcr.io/ivanzhovannik/docsabot:v$${VERSION}
+	docker pull ghcr.io/ivanzhovannik/docsabot:v$${VERSION}
 	@echo "Docker image ghcr.io/ivanzhovannik/docsabot:v$${VERSION} pulled successfully."
 
