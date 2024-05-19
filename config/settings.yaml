@@ -1,0 +1,19 @@
+---
+logging:
+    level: DEBUG
+
+openapi:
+    title: docsabot
+    description: |
+        ## App for automated action-triggered documentation update
+
+    version: 0.0.1
+    settings_path: config/settings.yaml
+
+    contact:
+        name: Ivan Zhovannik
+        url: null
+        email: null
+
+openai:
+    asynchronous: false
