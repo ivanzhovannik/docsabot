@@ -2,8 +2,8 @@ name: Publish Docker image
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build-and-push:
@@ -26,8 +26,15 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract version from tag
+        id: extract_version
+        run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
+          context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/docsabot:latest
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/docsabot:${{ env.VERSION }}
+            ghcr.io/${{ github.repository_owner }}/docsabot:latest
