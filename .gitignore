@@ -1,1 +1,7 @@
 __pycache__/
+
+# configuration secrets
+.secrets.*
+
+# scripts and experimentation
+scripts/
