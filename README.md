@@ -33,7 +33,7 @@ make run-prod
 ```
 ### Usage examples
 
-Some examples can be found in `docs/usage`
+Some examples can be found in [`docs/usage`](https://github.com/ivanzhovannik/docsabot/tree/main/docs/usage)
 
 ## Deployment
 
