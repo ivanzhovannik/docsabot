@@ -1,34 +1,28 @@
-# This is the file for pydantic models used for the bot,
-# not for the app communication
-
+from enum import Enum
 from pydantic import BaseModel, Field
+from typing import List, Optional
 
+class OpenAIRole(str, Enum):
+    ASSISTANT = "assistant"
+    SYSTEM = "system"
+    USER = "user"
 
-class MathSolution(BaseModel):
-    equation: str = Field(..., examples=["sin(x) = 1"])
-    solution: str | float = Field(..., examples=["pi/2 + 2*pi*k, where k is an integer"])
+class OpenAIMessage(BaseModel):
+    role: OpenAIRole = Field(..., examples=["user"])
+    content: str
 
-# Define your OutputSchema for parsing
-OutputSchema = MathSolution
+class OpenAIMessageQuery(BaseModel):
+    messages: List[OpenAIMessage]
 
-class Query(BaseModel):
-    messages: list[dict[str, str]] = Field(
-        ...,
-        examples=[[
-            {
-                "role": "user",
-                "content": f"Solve `2 * x = 1` for x."
-            },
-            {
-                "role": "assistant",
-                "content": str({
-                    "equation": "2 * x = 1",
-                    "solution": 0.5
-                })
-            },
-            {
-                "content": "Solve `cos(x) = 1` for x.",
-                "role": "user"
-            },
-        ]]
-        )
+class DocumentUpdate(BaseModel):
+    path: str
+    old_content: str
+    new_content: str
+
+class UpdateDocsPayload(BaseModel):
+    diff: str
+    repo: str
+    docs_path: str = "docs"
+    model: str = "gpt-3.5-turbo"
+    temperature: float = Field(1, ge=0, le=2)
+    updates: Optional[List[DocumentUpdate]] = None
