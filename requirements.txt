@@ -1,4 +1,5 @@
 dynaconf
+source-infuser==0.0.3
 fastapi
 gunicorn
 uvicorn

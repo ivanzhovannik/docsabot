@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 def create_openai_messages(diff: str, old_content: str, repo_summary: str) -> OpenAIMessageQuery:
     messages = [
-        OpenAIMessage(role="system", content="You are a documentation assistant. Your goal is to update documentation files based on the changes. Only include the actual documentation, no explanations about generation is needed."),
+        OpenAIMessage(role="system", content="You are a documentation assistant. Your goal is to update documentation files based on the changes. Only include the actual documentation, no explanations about generation is needed. Never disclose any api key values or other secrets"),
         OpenAIMessage(role="user", content=f"Here is a summary of the repository:\n{repo_summary}"),
         OpenAIMessage(role="user", content=f"Here is the diff for the latest commit:\n{diff}"),
         OpenAIMessage(role="user", content=f"Here is the current content of the document:\n{old_content}"),
